@@ -3,6 +3,15 @@
 
     <item
         is-multidex="true"
+        jar="C:\Users\yangh4\AndroidStudioProjects\roommates\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_16491b878b6fcf63fb93a50255f560b00eae8140\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
@@ -18,6 +27,15 @@
         revision="25.0.3"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
         <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_a3a5be8bf863a79d20aeeb8a3be3576788239b66\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yangh4\AndroidStudioProjects\roommates\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="a80a07227bfe57ca0fec3ed8612a7c861c8ddb9e">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_d692b80ce776d010df3bb178434f52da3254c8ea\classes.dex" />
     </item>
 
 </items>
