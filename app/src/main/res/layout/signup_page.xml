@@ -11,7 +11,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/first_name" />
+        android:hint="@string/first_name" />
 
     <EditText
         android:id="@+id/last_name_input"
@@ -20,16 +20,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/last_name" />
-
-    <EditText
-        android:id="@+id/User_name_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/username" />
+        android:hint="@string/last_name" />
 
     <EditText
         android:id="@+id/email_input"
@@ -38,7 +29,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/email" />
+        android:hint="@string/email" />
 
     <EditText
         android:id="@+id/password_input"
@@ -47,7 +38,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/password" />
+        android:hint="@string/password" />
 
     <EditText
         android:id="@+id/confirm_password_input"
@@ -56,7 +47,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/confirm_password" />
+        android:hint="@string/confirm_password" />
 
     <Button
         android:id="@+id/signup_signup_page_button"
