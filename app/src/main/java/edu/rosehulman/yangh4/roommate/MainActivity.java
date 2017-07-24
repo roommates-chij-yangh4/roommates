@@ -1,5 +1,6 @@
 package edu.rosehulman.yangh4.roommate;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -231,11 +234,21 @@ public class MainActivity extends AppCompatActivity
         ((TextView) mNavigationView.getHeaderView(0).findViewById(R.id.user_email_text)).setText(user.getEmail());
         ((TextView) mNavigationView.getHeaderView(0).findViewById(R.id.user_name_text)).setText(user.getName());
 //        ((ImageView) navigationView.findViewById(R.id.user_photo_image)).setImageBitmap(user.getPhoto());
+        hideKeyboard();
+    }
 
+    //Credit to https://stackoverflow.com/questions/1109022/close-hide-the-android-soft-keyboard
+    public void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     @Override
     public void findpassword() {
+        hideKeyboard();
         mFragmentStack.push(new FindPassword_Fragment());
         replacefragment(mFragmentStack.peek());
     }
@@ -254,6 +267,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void backtolastlevel() {
+        hideKeyboard();
         mFragmentStack.pop();
         replacefragment(mFragmentStack.peek());
     }
