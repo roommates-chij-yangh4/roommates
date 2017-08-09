@@ -3,6 +3,7 @@ package edu.rosehulman.yangh4.roommate;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -18,11 +19,19 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, GroupMemberAdapterFragment.Callback, GroupListFragment.Callback, Welcome_Fragment.Callback, Signup_fragment.Callback, Login_Fragment.Callback, ItemListFragment.Callback, AddItemFragment.Callback, CreateGroupFragment.Callback {
+        implements NavigationView.OnNavigationItemSelectedListener, GroupMemberAdapterFragment.Callback, GroupListFragment.Callback, Welcome_Fragment.Callback, Signup_fragment.Callback, Login_Fragment.OnLoginListener, ItemListFragment.Callback, AddItemFragment.Callback, CreateGroupFragment.Callback {
 
     public static User user;
     private Stack<Fragment> mFragmentStack;
@@ -31,12 +40,21 @@ public class MainActivity extends AppCompatActivity
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
     private boolean showoverflowbutton;
+    private static final int RC_SIGN_IN = 1;
+    private static final int RC_ROSEFIRE_LOGIN = 2;
+    FirebaseAuth mAuth;
+    DatabaseReference mDBRef;
+    FirebaseAuth.AuthStateListener mAuthStateListener;
+    OnCompleteListener mOnCompleteListener;
+    GoogleApiClient mGoogleApiClient;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         showoverflowbutton = false;
+        mAuth = FirebaseAuth.getInstance();
+        mDBRef = FirebaseDatabase.getInstance().getReference();
         mFragmentStack = new Stack<>();
         mFragmentStack.push(new Welcome_Fragment());
         replacefragment(mFragmentStack.peek());
@@ -51,6 +69,55 @@ public class MainActivity extends AppCompatActivity
         mNavigationView.setNavigationItemSelectedListener(this);
         mToggle.syncState();
     }
+
+    private void initializeListeners() {
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                //     Log.d(Constants.TAG, "User" + user.getDisplayName());
+                if (user != null) {
+                    Login(user.getUid());
+                } else {
+                    welcomelogin();
+                }
+            }
+        };
+        mOnCompleteListener = new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if (!task.isSuccessful()) {
+                    showLoginError("Login failed");
+                }
+            }
+        };
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mAuthStateListener != null) {
+            mAuth.removeAuthStateListener(mAuthStateListener);
+        }
+    }
+
+    @Override
+    public void onLogin(String email, String password) {
+        //TODO: Log user in with username & password
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(mOnCompleteListener);
+    }
+
+    public void onLogout() {
+        mAuth.signOut();
+    }
+
 
     //Credit to https://stackoverflow.com/questions/19439320/disabling-navigation-drawer-toggling-home-button-up-indicator-in-fragments
     public void setDrawerState(boolean isEnabled) {
@@ -175,6 +242,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void welcomelogin() {
         mFragmentStack.push(new Login_Fragment());
+        initializeListeners();
         replacefragment(mFragmentStack.peek());
     }
 
@@ -186,13 +254,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void Signup(CharSequence FirstName, CharSequence LastName, CharSequence Email, CharSequence Password) {
-        setUser(FirstName, LastName, Email, Password);
+   //     setUser(FirstName, LastName, Email, Password);
         mFragmentStack.pop();
         mFragmentStack.push(new Login_Fragment());
         replacefragment(mFragmentStack.peek());
     }
 
-    public void setUser(CharSequence FirstName, CharSequence LastName, CharSequence Email, CharSequence Password) {
+   /* public void setUser(String UID) {
         user = new User();
         user.setPassword(Password.toString());
         user.setEmail(Email.toString());
@@ -215,13 +283,11 @@ public class MainActivity extends AppCompatActivity
         //End
         user.setBelonggroup(test);
     }
+    */
 
-    @Override
-    public void Login(CharSequence email, CharSequence password) {
+    public void Login(String UID) {
         //Get FirstName and LastName from firebase
-        String FirstName = "Ocean";
-        String LastName = "Side";
-        setUser(FirstName, LastName, email, password);
+        //setUser(UID);
         //Clear the stack since we won't go back
         mFragmentStack.clear();
         mFragmentStack.push(GroupListFragment.newInstance(user.getBelonggroup()));
@@ -246,7 +312,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
     public void findpassword() {
         hideKeyboard();
         mFragmentStack.push(new FindPassword_Fragment());
@@ -271,4 +336,21 @@ public class MainActivity extends AppCompatActivity
         mFragmentStack.pop();
         replacefragment(mFragmentStack.peek());
     }
+
+
+    @Override
+    public void onGoogleLogin() {
+
+    }
+
+    @Override
+    public void onRosefireLogin() {
+
+    }
+
+    private void showLoginError(String message) {
+        Login_Fragment loginFragment = (Login_Fragment) getSupportFragmentManager().findFragmentByTag("Login");
+        loginFragment.onLoginError(message);
+    }
+
 }

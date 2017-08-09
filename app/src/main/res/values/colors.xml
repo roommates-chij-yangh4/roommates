@@ -5,4 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="lightGrey">#dddddd</color>
     <color name="white">#FFFFFF</color>
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="primary_light">#7986CB</color>
+    <color name="accent">#ffffff</color>
+    <color name="warning">#FF5722</color>
 </resources>
