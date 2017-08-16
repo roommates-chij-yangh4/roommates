@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,10 +30,10 @@ public class ItemListFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ItemListFragment newInstance(Group group) {
+    public static ItemListFragment newInstance(String groupKey) {
         ItemListFragment fragment = new ItemListFragment();
         Bundle args = new Bundle();
-        args.putParcelable(ARG_Adapter, new ItemListAdapter(group, mCallback));
+        args.putParcelable(ARG_Adapter, new ItemListAdapter(groupKey, mCallback));
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,8 +69,9 @@ public class ItemListFragment extends Fragment {
             case R.id.action_sort_price:
                 mAdapter.sortElement("PRICE");
                 break;
-//            case R.id.action_settings:
-//                break;
+            case R.id.action_clear_all:
+                mAdapter.clear();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -84,13 +86,15 @@ public class ItemListFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("FABCLICK", "ADD ITEM");
                 mCallback.addItem(mAdapter);
             }
         });
         if (mAdapter == null) {
-            mAdapter = new ItemListAdapter(new Group(), mCallback);
+            mAdapter = new ItemListAdapter("", mCallback);
         }
         view.setAdapter(mAdapter);
+        ((MainActivity) getActivity()).setActionBarTitle(mAdapter.getGroupKey() + "'s Items");
         return relativeview;
     }
 
@@ -115,5 +119,7 @@ public class ItemListFragment extends Fragment {
         void showItemDetail(Item item);
 
         void addItem(ItemListAdapter mAdapter);
+
+        void showEditDialog(ItemListAdapter mAdapter, Item item);
     }
 }

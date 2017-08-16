@@ -12,8 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class EditProfileFragment extends Fragment {
@@ -27,46 +32,53 @@ public class EditProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final User user = MainActivity.user;
+        final DatabaseReference mMemberRef = FirebaseDatabase.getInstance().getReference().child("members");
         final View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         final TextView firstname = (TextView) view.findViewById(R.id.edit_first_name);
         final TextView lastname = (TextView) view.findViewById(R.id.edit_last_name);
         final TextView cellphone = (TextView) view.findViewById(R.id.edit_cellphone);
         final TextView email = (TextView) view.findViewById(R.id.edit_email);
         final TextView contactinfo = (TextView) view.findViewById(R.id.edit_description);
-        final TextView pw = (TextView) view.findViewById(R.id.old_password);
-        final TextView newpw = (TextView) view.findViewById(R.id.edit_password);
-        final TextView newpwc = (TextView) view.findViewById(R.id.edit_password_confirm);
-        final ImageView img = (ImageView) view.findViewById(R.id.edit_photo);
-        Button button = (Button) view.findViewById(R.id.edit_button);
-        firstname.setText(user.getFirst_name());
-        lastname.setText(user.getLast_name());
-        cellphone.setText(user.getPhone());
-        email.setText(user.getEmail());
-        contactinfo.setText(user.getExtracontactinfo());
-        img.setImageBitmap(user.getPhoto());
-        button.setOnClickListener(new View.OnClickListener() {
+        mMemberRef.child(MainActivity.user.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                if (!user.getPassword().equals(pw.getText().toString())) {
-                    showWrongPasswordWarningDialog();
-                    return;
-                }
-                if (!newpw.getText().toString().equals(newpwc.getText().toString())) {
-                    showPasswordWarningDialog();
-                    return;
-                }
-                user.setFirst_name(firstname.getText().toString());
-                user.setLast_name(lastname.getText().toString());
-                user.setEmail(email.getText().toString());
-                user.setPhone(cellphone.getText().toString());
-                user.setPhoto(drawableToBitmap(img.getDrawable()));
-                user.setExtracontactinfo(contactinfo.getText().toString());
-                if (newpw.getText().toString().length() != 0) {
-                    user.setPassword(newpw.getText().toString());
-                }
-                Snackbar snackbar = Snackbar.make(view, "Changes Saved", Snackbar.LENGTH_SHORT);
-                snackbar.show();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final People user = dataSnapshot.getValue(People.class);
+                Button button = (Button) view.findViewById(R.id.edit_button);
+                firstname.setText(user.getFirst_name());
+                lastname.setText(user.getLast_name());
+                cellphone.setText(user.getPhone());
+                email.setText(user.getEmail());
+                contactinfo.setText(user.getExtracontactinfo());
+                ((MainActivity) getActivity()).setActionBarTitle("Edit Profile");
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        user.setFirst_name(firstname.getText().toString());
+                        user.setLast_name(lastname.getText().toString());
+                        user.setEmail(email.getText().toString());
+                        user.setPhone(cellphone.getText().toString());
+                        user.setExtracontactinfo(contactinfo.getText().toString());
+                        ((TextView) MainActivity.mNavigationView.findViewById(R.id.user_name_text)).setText(user.getName());
+                        ((TextView) MainActivity.mNavigationView.findViewById(R.id.user_email_text)).setText(user.getEmail());
+                        Snackbar snackbar = Snackbar.make(view, "Changes Saved", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                        mMemberRef.child(user.getKey()).setValue(user);
+                        if (!user.getGroupkeys().keySet().isEmpty() && !user.getItemkeys().keySet().isEmpty()) {
+                            for (String groupkey : user.getGroupkeys().keySet()) {
+                                DatabaseReference temp = FirebaseDatabase.getInstance().getReference().child("groups/" + groupkey);
+                                for (String itemkey : user.getItemkeys().keySet()) {
+                                    temp.child("items/" + itemkey + "/Username").setValue(user.getName());
+                                }
+                            }
+                        }
+                        MainActivity.user = user;
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
         return view;

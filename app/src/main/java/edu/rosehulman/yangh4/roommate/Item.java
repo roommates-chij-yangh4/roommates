@@ -16,19 +16,21 @@ public class Item implements Parcelable {
     private double itemprice;
     private Bitmap itempicture;
     private Date purchasedate;
-    private String tag;
     private String description;
+    private String groupkey;
+    private String key;
+    private String userkey;
 
     public Item() {
     }
 
-    public Item(CharSequence name, CharSequence price, CharSequence tag, CharSequence description) {
+    public Item(CharSequence name, CharSequence price, CharSequence description) {
         Username = MainActivity.user.getName();
         itemname = name.toString();
         itemprice = Double.parseDouble(price.toString());
-        this.tag = tag.toString();
         this.description = description.toString();
         purchasedate = new Date(System.currentTimeMillis());
+        userkey = MainActivity.user.getKey();
     }
 
     protected Item(Parcel in) {
@@ -36,9 +38,9 @@ public class Item implements Parcelable {
         Username = in.readString();
         itemprice = in.readDouble();
         itempicture = in.readParcelable(Bitmap.class.getClassLoader());
-        tag = in.readString();
         description = in.readString();
     }
+
 
     public static final Creator<Item> CREATOR = new Creator<Item>() {
         @Override
@@ -100,12 +102,28 @@ public class Item implements Parcelable {
         this.description = description;
     }
 
-    public String getTag() {
-        return tag;
+    public String getGroupkey() {
+        return groupkey;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setGroupkey(String groupkey) {
+        this.groupkey = groupkey;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getUserkey() {
+        return userkey;
+    }
+
+    public void setUserkey(String userkey) {
+        this.userkey = userkey;
     }
 
     @Override
@@ -119,7 +137,9 @@ public class Item implements Parcelable {
         dest.writeString(Username);
         dest.writeDouble(itemprice);
         dest.writeParcelable(itempicture, flags);
-        dest.writeString(tag);
         dest.writeString(description);
+        dest.writeString(groupkey);
+        dest.writeString(key);
+        dest.writeString(userkey);
     }
 }

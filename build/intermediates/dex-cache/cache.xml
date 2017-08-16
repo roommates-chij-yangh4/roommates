@@ -3,111 +3,156 @@
 
     <item
         is-multidex="true"
-        jar="/Users/jacksonchi/.android/build-cache/0284f50dae17f9431fd69f59b9a4a6a52c3cc1a2/output/jars/classes.jar"
+        jar="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="de24d8023e8da79f30bee46b298f606e5e758432">
-        <dex dex="/Users/jacksonchi/roommates/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c32acf93f13bc7b2e10c74fef4d1ce6efe10fa97/classes.dex" />
+        sha1="9b5d6f35ec44369f6d30e31823bb1d86242b4d9d">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_21cedb42842fe84ad23be89d85b10db00350a306\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\5c5173e65c09999f29527e723594f8a170a265b4\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="a71be5f29a1c1e3fd3e84472742668f101a5b936">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_8d7cfe0177110e751cbdbb4b1a43f25eaec8eb8a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\bb8d6a6332a12e26d3eed2e97d958dacf09a99cb\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="a3d07dfddc7c3c7547fb953847589d586f1e2077">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_0b44c09bf3fd33639907374ba6623e900c45c8ab.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\9413ffa451738574c97ca0465beab31f22996034\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="2c1d9fbe7d2f686b3dcdbc3f63a983a211401ca3">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_4bb45534abd9f4cf71ff21ee8b4d2ad4884e9abd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\4cd8ecd33bbb010636f7c956f2b9cc8697966a82\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="fc5624185d414a0f572bfb3df7d841ceb335aef9">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_fe8a01e6610bedf98d38eff0a4c1c55e6ce95ca1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\d59ff7009dabfac46e759f80468b804900866ca8\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="86baa7d1051901fc1b8e7f596732f71f32175bde">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_10ecccc920ea39810cfe890da90a05b7422fc27f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\232ea49a2869547f0964cdca3453960aed527d13\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="f260cdc1a267b17b911022919f19d568e6624229">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_2bdc65e8b53b0a0a6376f4b2d775f0248e9d3291.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\66f3d63099ec46230d2dd282bf4d5f58d686e31a\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="9a6350134db98fb39e212ddca5f0bad9280e8f3f">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_0240b290ac840367bbb64e9abf02947f5de8f786.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\8007cfa3e578d8db2ae3b6a6651c59aadec82134\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="4802b21cc23549f7eba5edb802241091ad998b35">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_932e3012fdd0d6dc126f241f8a914cf8d6a78095.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\10ccb68f8eba415044e4b1b7a82afc00de03773a\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="9e8c74e789b51b9da4070aeaed71bae36c3d244f">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_30026a120dd930bccd39f70af7fe33268e05067b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\c7f2e13565090785df8054cb636ce88cba31bc52\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="3560fc891bbecd8982acbace15ccead59c3fedd1">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_672bd484d47f9d6ab2a1fcddd6eefab71789fbd5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\6da2ba002686ecbdf2ca8be6d595d8dec08f3c40\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="4262bcd49b19d558c241bf8c68470fcc6fa1ac84">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_4e84a8dc510066f7a581bdd6e64ba6989763d294.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\3a04bdcd7899b3a9fd2be7b4478699342c4662b7\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="2a2d9cd43adbe7599a78f2293273a77881c1909a">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_1b88b8dc674546c6b6126e5fd56b5292525935b2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\1effb2eaa376aafd36dcb555b989546916b05036\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="2737331564e0084fc0eb30ba500564a6dbe5e98f">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_f631e0810c1b923de349b40d94abe64f1d898f21.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\9c0df0a596e027fa52a88e4feca2be6442d13897\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="dbbba1fc0f6c51382c3fa1f9223d1f6f9144f359">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_9b77fd2d8a7bea9b5c31146fae91f1301f16e7aa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yangh4\.android\build-cache\71d06c4f07cf89487a01f81ce136404af2b3f6cc\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="86e2c2399cfd7f8271b535b0e7d8ec092d0c6335">
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\pre-dexed\debug\classes_85b7fdb66c208e6f5e295659ff01b13e8ba28ae8.jar" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/jacksonchi/roommates/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/jacksonchi/roommates/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_82e61d3d6fc3354d0b82a7244c0c3b2d70ade34f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jacksonchi/.android/build-cache/d0037cae79f7201eb8dca761d6071ec099f0a9a6/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="3f0a85e6000998ac322ddd50750e8cf91601a84b">
-        <dex dex="/Users/jacksonchi/roommates/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_212e90e9db5e32d6c1c75aa1e88b7f21c6bdd124/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jacksonchi/.android/build-cache/b58cbd52c7de02745315e6065a7f7079e4b5485d/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="d79c575e1d97b0298746a4c032a0c1dc201c2f82">
-        <dex dex="/Users/jacksonchi/roommates/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ad88f6edb80f3041dc18049de0ccf39a64ded293/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jacksonchi/.android/build-cache/5d1bdbeb2504a748ebdd45628af919a8b426cf62/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="8f83a631abfdb790591a720e0cfb5f41329831c3">
-        <dex dex="/Users/jacksonchi/roommates/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_27f012efc7b29b9629595d8097658ed13a464290/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jacksonchi/.android/build-cache/0cabd880f844934ab2ed31913d6dff169106637b/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="5c1f80f62ccad560edcd6609fc75f385cf7cb45a">
-        <dex dex="/Users/jacksonchi/roommates/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6570ef79902110681c82772aae0e346f8aa7699e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jacksonchi/.android/build-cache/b17999f87cbef983f2112cbd55e2ac25f9dc5ed2/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="69e74a8b1cbf5b8ee0fc0cca6bab1ac6c45efef8">
-        <dex dex="/Users/jacksonchi/roommates/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5bb317e208d3f80616ad6a052b76c7a26e33bc3d/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jacksonchi/.android/build-cache/87b7663f7fc6b3db0c33bf257bc7dcf0c6a6e2c5/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="0a534044236cf81b002604643d23e7ca56bd1ee0">
-        <dex dex="/Users/jacksonchi/roommates/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b2491c9850a8ddbce532b87c87e1f6540a057992/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jacksonchi/roommates/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="297557039199fd6678152ec0c3c9f1b85f13fdf1">
-        <dex dex="/Users/jacksonchi/roommates/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_fc65d4aa588db900d9eb38b716cff73cc79b9107/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jacksonchi/.android/build-cache/50bdc40ee5d289c82564029524f73edda6e0b81e/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="900a290779cdb4eb2e63b6f7806fd9f30ce4f60d">
-        <dex dex="/Users/jacksonchi/roommates/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9c72d947326a2f3a4ac19661881fc4307190f1a2/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jacksonchi/.android/build-cache/f47ff4ec4b4ec117db2b359449dd9a23fb3317f0/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="da832806828ba407284c0c4b1d87b8f9ed9f2520">
-        <dex dex="/Users/jacksonchi/roommates/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_16ac59539d1c776314bf47eb075bc90d05f39bab/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jacksonchi/.android/build-cache/6ea22bc32aca8c859ddaca374b691904e9ad8d65/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="7b3eaf755284fb08a6d616a55fbb07dc3917d5e7">
-        <dex dex="/Users/jacksonchi/roommates/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2f049dfc8e08cfdd63c0fc03be3190d83ba2b1ff/classes.dex" />
+        <dex dex="C:\Users\yangh4\AndroidStudioProjects\roommates-master\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_a3a5be8bf863a79d20aeeb8a3be3576788239b66\classes.dex" />
     </item>
 
 </items>

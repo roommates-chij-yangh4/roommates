@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Hao Yang on 7/22/2017.
@@ -13,45 +14,16 @@ public class Group implements Parcelable {
     private ArrayList<Item> itemlist;
     private String password;
     private String id;
-    private ArrayList<People> groupmembers;
+    private HashMap<String, Boolean> memberkeys;
     private String groupname;
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     protected Group(Parcel in) {
+        itemlist = in.createTypedArrayList(Item.CREATOR);
+        password = in.readString();
+        id = in.readString();
         groupname = in.readString();
-
         description = in.readString();
-        balance = in.readDouble();
     }
-
-    public ArrayList<Item> getItemlist() {
-        return itemlist;
-    }
-
-    public void setItemlist(ArrayList<Item> itemlist) {
-        this.itemlist = itemlist;
-    }
-
-    public void addItem(Item item) {
-        itemlist.add(item);
-
-    }
-
 
     public static final Creator<Group> CREATOR = new Creator<Group>() {
         @Override
@@ -65,6 +37,51 @@ public class Group implements Parcelable {
         }
     };
 
+    public HashMap<String, Double> getBalanceMap() {
+        return balanceMap;
+    }
+
+    public void setBalanceMap(HashMap<String, Double> balanceMap) {
+        this.balanceMap = balanceMap;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public HashMap<String, Boolean> getMemberkeys() {
+        return memberkeys;
+    }
+
+    public void setMemberkeys(HashMap<String, Boolean> memberkeys) {
+        this.memberkeys = memberkeys;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ArrayList<Item> getItemlist() {
+        return itemlist;
+    }
+
+    public void setItemlist(ArrayList<Item> itemlist) {
+        this.itemlist = itemlist;
+    }
+
+    public void addItem(Item item) {
+        itemlist.add(item);
+    }
+
+
     public String getDescription() {
         return description;
     }
@@ -75,25 +92,14 @@ public class Group implements Parcelable {
 
     private String description;
 
-    public double getBalance() {
-        return balance;
-    }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    private double balance = 0;
+    private HashMap<String, Double> balanceMap = new HashMap<>();
 
 
     public Group() {
         this.itemlist = new ArrayList<>();
-        this.groupmembers = new ArrayList<>();
+        this.memberkeys = new HashMap<>();
         this.description = "Description should be here";
-    }
-
-    public ArrayList<People> getGroupmembers() {
-        return groupmembers;
     }
 
     public String getGroupname() {
@@ -101,11 +107,20 @@ public class Group implements Parcelable {
     }
 
     public void updateBalance() {
-        double price = 0;
-        for (Item items : itemlist) {
-            price += items.getItemprice();
+        for (String key : balanceMap.keySet()) {
+            balanceMap.put(key, 0.0);
         }
-        this.balance = price / groupmembers.size();
+        for (Item item : itemlist) {
+            for (String key : balanceMap.keySet()) {
+                if (item.getUserkey().equals(key)) {
+                    int size = memberkeys.size();
+                    balanceMap.put(key, balanceMap.get(key) + (item.getItemprice()) * ((size - 1 == 0 ? 1 : size - 1)) / size);
+                } else {
+                    balanceMap.put(key, balanceMap.get(key) - item.getItemprice() / memberkeys.size());
+                }
+            }
+        }
+        return;
     }
 
 
@@ -114,7 +129,11 @@ public class Group implements Parcelable {
     }
 
     public void addMember(People member) {
-        this.groupmembers.add(member);
+        this.memberkeys.put(member.getKey(), true);
+    }
+
+    public void remove(Item item) {
+        itemlist.remove(item);
     }
 
     @Override
@@ -124,8 +143,10 @@ public class Group implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(itemlist);
+        dest.writeString(password);
+        dest.writeString(id);
         dest.writeString(groupname);
         dest.writeString(description);
-        dest.writeDouble(balance);
     }
 }

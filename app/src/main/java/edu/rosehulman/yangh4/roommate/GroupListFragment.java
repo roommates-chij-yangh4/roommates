@@ -3,9 +3,11 @@ package edu.rosehulman.yangh4.roommate;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,8 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
-import java.util.ArrayList;
 
 
 /**
@@ -39,15 +39,16 @@ public class GroupListFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private static Callback mCallback;
+    private String mUid;
 
     public GroupListFragment() {
         // Required empty public constructor
     }
 
-    public static GroupListFragment newInstance(ArrayList<Group> grouplist) {
+    public static GroupListFragment newInstance(String uid) {
         GroupListFragment fragment = new GroupListFragment();
         Bundle args = new Bundle();
-        args.putParcelable(ARG_Adapter, new GroupAdapter(grouplist, mCallback));
+        args.putString("user id", uid);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,8 +58,9 @@ public class GroupListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         if (getArguments() != null) {
-            mGroupAdapter = getArguments().getParcelable(ARG_Adapter);
-            mGroupAdapter.setmCallback(mCallback);
+            mUid = getArguments().getString("user id");
+//            mGroupAdapter = getArguments().getParcelable(ARG_Adapter);
+//            mGroupAdapter.setmCallback(mCallback);
         }
     }
 
@@ -75,10 +77,17 @@ public class GroupListFragment extends Fragment {
         RelativeLayout relativeview = (RelativeLayout) inflater.inflate(R.layout.group_recycler_view, container, false);
         RecyclerView view = (RecyclerView) relativeview.findViewById(R.id.group_list_view);
         view.setLayoutManager(new LinearLayoutManager(getContext()));
-        if (mGroupAdapter == null) {
-            mGroupAdapter = new GroupAdapter(new ArrayList<Group>(), mCallback);
-        }
+        mGroupAdapter = new GroupAdapter(mCallback, mUid);
         view.setAdapter(mGroupAdapter);
+        FloatingActionButton fab = (FloatingActionButton) relativeview.findViewById(R.id.group_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("FABCLICK", "ADD ITEM");
+                mCallback.joinGroup(mGroupAdapter);
+            }
+        });
+        ((MainActivity) getActivity()).setActionBarTitle("Group List");
         return relativeview;
     }
 
@@ -134,5 +143,9 @@ public class GroupListFragment extends Fragment {
         void showgroupmember(Group group);
 
         void createNewGroup(GroupAdapter mGroupAdapter);
+
+        void joinGroup(GroupAdapter mGroupAdapter);
+
+        void showEditGroupDialog(Group group);
     }
 }

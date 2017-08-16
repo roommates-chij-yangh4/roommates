@@ -44,6 +44,8 @@ public class PeopleInfo_Fragment extends Fragment {
         ((TextView) view.findViewById(R.id.person_name)).setText(person.getName());
         ((TextView) view.findViewById(R.id.person_phone)).setText(person.getPhone());
         ((TextView) view.findViewById(R.id.people_contact_info)).setText(person.getEmail() + "\n" + person.getExtracontactinfo());
+        ((TextView) view.findViewById(R.id.person_key)).setText(person.getKey());
+        ((MainActivity) getActivity()).setActionBarTitle(person.getName());
         return view;
     }
 

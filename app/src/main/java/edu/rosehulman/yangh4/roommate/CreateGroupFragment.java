@@ -4,11 +4,19 @@ package edu.rosehulman.yangh4.roommate;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -64,27 +72,86 @@ public class CreateGroupFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_group, container, false);
+        ((MainActivity) getActivity()).setActionBarTitle("Create Group");
         final TextView groupName = (TextView) view.findViewById(R.id.group_name_input);
         final TextView groupID = (TextView) view.findViewById(R.id.group_id);
         final TextView groupPW = (TextView) view.findViewById(R.id.group_password);
-        TextView groupPWC = (TextView) view.findViewById(R.id.group_password_confirm);
+        final TextView groupPWC = (TextView) view.findViewById(R.id.group_password_confirm);
         Button button = (Button) view.findViewById(R.id.group_create_confirm);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Group group = new Group();
-                group.addMember(MainActivity.user);
-                group.setId(groupID.getText().toString());
-                group.setGroupname(groupName.getText().toString());
-                group.setPassword(groupPW.toString());
-                mAdapter.getmGroupList().add(group);
-                mAdapter.notifyDataSetChanged();
-                mCallback.backtolastlevel();
+                boolean cancel = false;
+                View focusView = null;
+
+                if (!groupPW.getText().toString().equals(groupPWC.getText().toString())) {
+                    groupPW.setError("Password does not match");
+                    focusView = groupPWC;
+                    cancel = true;
+                }
+
+                if (TextUtils.isEmpty(groupName.getText())) {
+                    groupName.setError(getString(R.string.field_required));
+                    focusView = groupName;
+                    cancel = true;
+                }
+                if (TextUtils.isEmpty(groupPW.getText())) {
+                    groupPW.setError(getString(R.string.field_required));
+                    focusView = groupPW;
+                    cancel = true;
+                }
+                if (TextUtils.isEmpty(groupPWC.getText())) {
+                    groupPWC.setError(getString(R.string.field_required));
+                    focusView = groupPWC;
+                    cancel = true;
+                }
+                if (TextUtils.isEmpty(groupID.getText())) {
+                    groupID.setError(getString(R.string.field_required));
+                    focusView = groupID;
+                    cancel = true;
+                } else {
+                    DatabaseReference mGroupRef = FirebaseDatabase.getInstance().getReference().child("groups/" + groupID.getText().toString());
+                    mGroupRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.getValue(Group.class) != null) {
+                                onCreateGroupError("Group with same ID already exist!");
+                            } else {
+                                Group group = new Group();
+                                group.setId(groupID.getText().toString());
+                                group.setGroupname(groupName.getText().toString());
+                                group.setPassword(groupPW.getText().toString());
+                                DatabaseReference mPeopleRef = FirebaseDatabase.getInstance().getReference().child("members/" + MainActivity.user.getKey());
+                                mPeopleRef.child("groupkeys/" + group.getId()).setValue(true);
+                                mAdapter.add(group);
+                                mAdapter.notifyDataSetChanged();
+                                mCallback.backtolastlevel();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    if (cancel) {
+                        focusView.requestFocus();
+                        return;
+                    }
+                }
             }
         });
         return view;
     }
 
+    public void onCreateGroupError(String message) {
+        new AlertDialog.Builder(getActivity())
+                .setTitle("Create Group Error!")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, null)
+                .create()
+                .show();
+    }
 
     public interface Callback {
         void backtolastlevel();
